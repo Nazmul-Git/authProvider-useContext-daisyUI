@@ -1,30 +1,45 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { createContext, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, { createContext, useEffect, useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import app from './firebase.config';
 
-export const AuthContext= createContext(null);
-const auth=getAuth(app);
+export const AuthContext = createContext(null);
+const auth = getAuth(app);
 
 
-const AuthProvider = ({children}) => {
-    const [user, setUser]=useState(null);
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
 
-    const createUser=(email, pass)=>{
+    const createUser = (email, pass) => {
         return createUserWithEmailAndPassword(auth, email, pass)
     }
 
-    const userLogin=(email, pass)=>{
+    const userLogin = (email, pass) => {
         return signInWithEmailAndPassword(auth, email, pass)
     }
 
+    const userLogOut = () => {
+        return signOut(auth);
+    }
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            console.log(currentUser);
+            setUser(currentUser);
+        })
+        return () => {
+            unsubscribe();
+        }
+    })
 
 
-    const authInfo={
+
+    const authInfo = {
         user,
         createUser,
         userLogin,
+        userLogOut,
     }
 
 
