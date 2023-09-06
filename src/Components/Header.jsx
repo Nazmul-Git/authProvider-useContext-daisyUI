@@ -17,12 +17,13 @@ const Header = () => {
         <div className="navbar bg-base-300">
             <Link to="/" className="btn btn-ghost normal-case text-2xl">daisyUI</Link>
             <Link to="/" className="btn btn-ghost normal-case text-xl">Home</Link>
+            <Link to="/orders" className="btn btn-ghost normal-case text-xl">Orders</Link>
             <Link to="/login" className="btn btn-ghost normal-case text-xl">Login</Link>
-            <Link to="/register" className="btn btn-ghost normal-case text-xl">Register</Link>
+            <Link to="/register" className="btn btn-ghost normal-case text-xl mr-20">Register</Link>
             {
                 user ? <>
                     <span>{user.email}</span>
-                    <button onClick={logOutUser} className='btn btn-xs'>Sign Out</button>:
+                    <button onClick={logOutUser} className='btn btn-xs ml-10'>Sign Out</button>
                 </>
                     :
                     <Link to="/login">Login</Link>

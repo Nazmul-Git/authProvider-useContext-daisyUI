@@ -58,6 +58,7 @@ const Login = () => {
                         </div>
                         <Link to='/register' className="label-text-alt link link-hover"><small>Are you new in this site?</small> Please register..</Link>
                     </form>
+                    <button className="btn btn-xs m-6 hover:text-blue-600">Sign in with Gmail</button>
                 </div>
             </div>
         </div>
